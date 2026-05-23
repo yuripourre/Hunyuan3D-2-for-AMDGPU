@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Install Hunyuan3D-2 with ROCm: venv, PyTorch, extensions, and dependencies.
+# Complete Hunyuan3D-2 app install (deps, hy3dgen, extensions) after bootstrap-rasterizer.
 
 set -euo pipefail
 
@@ -33,6 +33,8 @@ while [[ $# -gt 0 ]]; do
             ;;
         -h|--help)
             echo "Usage: $0 [--port PORT] [--gpu-arch GFX] [--skip-flash-attention] [--skip-model-download] [--no-multiview]"
+            echo "  Completes Hunyuan install for Gradio (use after bootstrap-rasterizer.sh)."
+            echo "  Downloads public HF models without login unless --skip-model-download."
             exit 0
             ;;
         *)
@@ -71,7 +73,7 @@ install_gradio_app
 write_gradio_port
 
 log ""
-log "Installation complete."
+log "App installation complete."
 log "  Run single-view:  ./scripts/run.sh"
 log "  Run multiview:    ./scripts/run-multiview.sh"
 log "  Port (default):   ${GRADIO_PORT:-8080} (override: GRADIO_PORT=9000 ./scripts/run.sh)"
